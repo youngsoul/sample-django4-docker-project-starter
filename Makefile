@@ -6,6 +6,10 @@
 db-id=$(shell docker ps -a -q -f "name=django-db"  | head -n 1)
 web-id=$(shell docker ps -a -q -f "name=django-web" | head -n 1)
 
+show-ids:
+	@echo "web container id: " $(web-id)
+	@echo "db container id:  " $(db-id)
+
 # Build docker containers
 build: build-web build-db
 

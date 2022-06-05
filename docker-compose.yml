@@ -9,12 +9,6 @@ services:
     volumes:
       - .:/code
 
-  term:
-    build: .
-    command: bash
-    volumes:
-      - .:/code
-
   django-db:
       image: postgres:14.2
       container_name: 'pg14-django-db'
