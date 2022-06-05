@@ -45,11 +45,9 @@ DATABASES = {
 Docker compose commands:
 
 ```shell
-docker-compose build term
-docker-compose run term
-django-admin startproject django_project .
-docker-compose up -d --build
+docker-compose build web
 docker-compose exec web django-admin startproject django_project .
+docker-compose up -d --build
 docker-compose exec web python manage.py migrate
 docker-compose exec web python manage.py createsuperuser
 
