@@ -1,6 +1,6 @@
-docker-compose build web
-docker-compose exec web django-admin startproject django_project .
+docker-compose build django-web
+docker-compose exec django-web django-admin startproject django_project .
 docker-compose up -d --build
-docker-compose exec web python manage.py migrate
-docker-compose exec web python manage.py createsuperuser
+docker-compose exec django-web python manage.py migrate
+docker-compose exec django-web python manage.py createsuperuser
 
