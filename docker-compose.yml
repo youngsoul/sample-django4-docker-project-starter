@@ -3,6 +3,7 @@ version: "3.9"
 services:
   django-web:
     build: .
+    container_name: django4-web
     ports:
       - "8000:8000"
     command: python manage.py runserver 0.0.0.0:8000
@@ -11,9 +12,9 @@ services:
 
   django-db:
       image: postgres:14.2
-      container_name: 'pg14-django-db'
+      container_name: 'pg14-django4-db'
       labels:
-        application: 'pg14-django-db'
+        application: 'pg14-django4-db'
       volumes:
         - pg_django_data:/var/lib/postgresql/data/
       command: postgres -c shared_preload_libraries=pg_stat_statements -c pg_stat_statements.track=all -c max_connections=200
