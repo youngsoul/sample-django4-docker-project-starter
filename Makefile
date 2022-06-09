@@ -14,7 +14,7 @@ show-ids:
 build: build-web build-db
 
 build-web:
-	@docker-compose -f docker-compose.yml build web
+	@docker-compose -f docker-compose.yml build django4-web
 
 build-db:
 	@docker-compose -f docker-compose.yml build db
@@ -24,7 +24,7 @@ run:
 	@docker-compose -f docker-compose.yml up
 
 run-web:
-	@docker-compose -f docker-compose.yml up web
+	@docker-compose -f docker-compose.yml up django4-web
 
 run-db:
 	@docker-compose -f docker-compose.yml up db
@@ -35,8 +35,10 @@ restart: stop run
 # Stop docker containers, but not remove them nor the volumes
 stop:
 	@docker-compose stop
+
 stop-db:
 	-@docker stop $(db-id)
+
 stop-web:
 	-@docker stop $(web-id)
 
