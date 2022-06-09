@@ -54,3 +54,10 @@ docker-compose exec django-web python manage.py createsuperuser
 
 or you can run the `init_project.sh`
 
+When the script finishes, the docker containers for the Django WebServer and Postgres DB are running.
+
+You can open a browser and go to:
+
+http://localhost:8080
+
+and you should see the familiar Django start page.
