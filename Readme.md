@@ -61,3 +61,71 @@ You can open a browser and go to:
 http://localhost:8080
 
 and you should see the familiar Django start page.
+
+
+## Custom User model
+
+* Create a CustomUser model
+* Update django_project/settings.py
+* Customize UserCreationForm and UserChangeForm
+* Add the custom user model to admin.py
+
+```shell
+docker-compose exec django4-web python manage.py startapp accounts
+
+or
+
+make cmd="startapp accounts" manage
+```
+
+```python
+# accounts/models.py
+from django.db import models
+from django.contrib.auth.models import AbstractUser
+# Create your models here.
+
+class CustomUser(AbstractUser):
+    pass
+```
+
+* settings.py
+
+```python
+# django_project/settings.py
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+
+    # Local
+    "accounts"
+]
+
+# at the bottom of the file
+AUTH_USER_MODEL = "accounts.CustomUser"
+```
+
+* Make migrations
+
+```shell
+docker-compose exec django-web python manage.py makemigrations accounts
+
+or
+
+make cmd="makemigrations accounts" manage
+
+```
+
+* Run migrations
+
+```shell
+docker-compose exec django-web python manage.py migrate
+
+or
+
+make cmd=migrate manage
+
+```

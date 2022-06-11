@@ -14,17 +14,23 @@ show-ids:
 build: build-web build-db
 
 build-web:
-	@docker-compose -f docker-compose.yml build django4-web
+	@docker-compose -f docker-compose.yml build django-web
 
 build-db:
-	@docker-compose -f docker-compose.yml build db
+	@docker-compose -f docker-compose.yml build django-db
 
 # Run docker containers
 run:
 	@docker-compose -f docker-compose.yml up
 
+run-back:
+	@docker-compose -f docker-compose.yml up -d
+
+runbuild-web:
+	@docker-compose -f docker-compose.yml up --build django-web
+
 run-web:
-	@docker-compose -f docker-compose.yml up django4-web
+	@docker-compose -f docker-compose.yml up django-web
 
 run-db:
 	@docker-compose -f docker-compose.yml up db
@@ -62,18 +68,18 @@ shell-web:
 shell-db:
 	@docker exec -it $(db-id) bash
 
-tests:
-	@docker-compose exec web python manage.py test
+run-tests:
+	@docker-compose exec django-web python manage.py test
 
 
 migrations:
-	@docker-compose exec web python manage.py makemigrations
+	@docker-compose exec django-web python manage.py makemigrations
 
 migrate:
-	@docker-compose exec web python manage.py migrate
+	@docker-compose exec django-web python manage.py migrate
 
 collectstatic:
-	@docker-compose exec web python manage.py collectstatic
+	@docker-compose exec django-web python manage.py collectstatic
 
 
 logs:
@@ -81,6 +87,7 @@ logs:
 
 # Django commands
 # make cmd=migrate manage
+# make cmd="startapp accounts" manage
 manage:
 	@docker exec -t $(web-id) python manage.py $(cmd)
 
