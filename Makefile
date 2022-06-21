@@ -38,6 +38,8 @@ run-db:
 # restart containers with a stop then run
 restart: stop run
 
+restart-web: stop-web run-web
+
 # Stop docker containers, but not remove them nor the volumes
 stop:
 	@docker-compose stop
