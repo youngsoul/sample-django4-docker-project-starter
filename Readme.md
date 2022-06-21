@@ -16,11 +16,20 @@ This docker image uses `pip-tools` to manage dependencies.  By placing the depen
 
 * clone this repo and in terminal window run:
 
+```shell
+git clone https://github.com/youngsoul/sample-django4-docker-project-starter.git <projectdirname>
+```
+
 * review `init_project.sh`
 
 Either run the script or execute each of the commands to get a base Django project.
 
 Note that this will NOT run an initial migration because we want to create a customer User model BEFORE we run the initial migration.
+
+```shell
+chmod +x init_project.#!/bin/sh
+./init_project.sh
+```
 
 ## PyCharm
 
