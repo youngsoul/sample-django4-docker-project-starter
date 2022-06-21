@@ -5,20 +5,11 @@
 
 * clone this repo and in terminal window run:
 
-* `docker-compose build term`
+* review `init_project.sh`
 
-* `docker-compose run term`
+Either run the script or execute each of the commands to get a base Django project.
 
-In the docker terminal window run:
-
-* `django-admin startproject myproject .`
-* `python manage.py migrate`
-
-In terminal window run:
-
-* `docker-compose build web`
-* `docker-compose up web`
-
+Note that this will NOT run an initial migration because we want to create a customer User model BEFORE we run the initial migration.
 
 ## PyCharm
 
@@ -42,18 +33,6 @@ DATABASES = {
 
 ```
 
-Docker compose commands:
-
-```shell
-docker-compose build django-web
-docker-compose run django-web django-admin startproject django_project .
-docker-compose up -d --build
-docker-compose exec django-web python manage.py migrate
-docker-compose exec django-web python manage.py createsuperuser
-```
-
-or you can run the `init_project.sh`
-
 When the script finishes, the docker containers for the Django WebServer and Postgres DB are running.
 
 You can open a browser and go to:
@@ -64,6 +43,8 @@ and you should see the familiar Django start page.
 
 
 ## Custom User model
+
+You almost always want to create a customer user model, BEFORE your initial migration.
 
 * Create a CustomUser model
 * Update django_project/settings.py
