@@ -6,3 +6,4 @@ docker-compose up -d --build
 # you create a custom user model
 #docker-compose exec django-web python manage.py migrate
 #docker-compose exec django-web python manage.py createsuperuser
+echo "open browser and go to:  http://localhost:8000.  You should see the Django starting page"
