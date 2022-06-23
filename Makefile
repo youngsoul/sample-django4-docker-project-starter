@@ -93,6 +93,10 @@ logs:
 manage:
 	@docker exec -t $(web-id) python manage.py $(cmd)
 
+# make  startapp app="pages"
+startapp:
+	@docker exec -t $(web-id) python manage.py startapp $(app)
+
 volumes:
 	@docker volume ls
 
