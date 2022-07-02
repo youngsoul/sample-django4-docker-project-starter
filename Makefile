@@ -118,8 +118,12 @@ generate-secret-key:
 heroku-login:
 	@heroku login
 
+heroku-whoami:
+    @heroku whoami
+
 heroku-create:
 	@heroku create
+
 
 heroku-app-name=serene-bastion-37621
 
