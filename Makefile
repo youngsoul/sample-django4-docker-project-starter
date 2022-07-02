@@ -3,8 +3,8 @@
 # + means 'execute this command under make -n' (or 'make -t' or 'make -q') when commands are not normally executed.
 
 # Containers ids
-db-id=$(shell docker ps -a -q -f "name=pg14-django4-db"  | head -n 1)
-web-id=$(shell docker ps -a -q -f "name=django4-web" | head -n 1)
+db-id=$(shell docker ps -a -q -f "name=pages-pg14-django4-db"  | head -n 1)
+web-id=$(shell docker ps -a -q -f "name=pages-django4-web" | head -n 1)
 
 show-ids:
 	@echo "web container id: " $(web-id)
@@ -114,37 +114,43 @@ deploy-checklist:
 generate-secret-key:
 	@docker-compose exec web python -c 'import secrets; print(secrets.token_urlsafe(38))'
 
-
+# Heroku command
 heroku-login:
 	@heroku login
 
 heroku-whoami:
-    @heroku whoami
+	@heroku login
 
 heroku-create:
 	@heroku create
 
+# make heroku-stop-app appname=gentle-earth-75811
+heroku-stop-app:
+	@heroku ps:scale web=0 --app $(appname)
 
-heroku-app-name=serene-bastion-37621
-
+# make heroku-set-container appname=gentle-earth-75811
 heroku-set-container:
-	@heroku stack:set container -a $(heroku-app-name)
+	@heroku stack:set container -a $(appname)
 
+# make heroku-create-postgres appname=gentle-earth-75811
 heroku-create-postgres:
-	@heroku addons:create heroku-postgresql:hobby-dev -a $(heroku-app-name)
+	@heroku addons:create heroku-postgresql:hobby-dev -a $(appname)
 
 heroku-django-secret-key:
 	@heroku config:set DJANGO_SECRET_KEY=$(shell python -c 'import secrets; print(secrets.token_urlsafe(38))')  -a $(heroku-app-name)
 
+
+# make heroku-git-remote appname=gentle-earth-75811
 heroku-git-remote:
-	@heroku git:remote -a $(heroku-app-name)
+	@heroku git:remote -a $(appname)
 
 heroku-push-master:
 	-git remote -v
 	-git push heroku master
 
+# make heroku-open appname=gentle-earth-75811
 heroku-open:
-	@heroku open -a $(heroku-app-name)
+	@heroku open -a $(appname)
 
 # Django commands
 # make cmd=migrate heroku-manage
