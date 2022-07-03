@@ -17,6 +17,7 @@ ENV PYTHONUNBUFFERED 1
 
 # Set working directory inside container
 WORKDIR /code
+RUN mkdir templates
 
 # Install Dependencies
 COPY ./requirements.in .
