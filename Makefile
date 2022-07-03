@@ -73,9 +73,9 @@ shell-db:
 run-tests:
 	@docker-compose exec django-web python manage.py test
 
-
+# make migrations appname=posts
 migrations:
-	@docker-compose exec django-web python manage.py makemigrations
+    @docker-compose exec django-web python manage.py makemigrations $(appname)
 
 migrate:
 	@docker-compose exec django-web python manage.py migrate
