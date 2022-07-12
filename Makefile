@@ -128,6 +128,10 @@ heroku-create:
 heroku-stop-app:
 	@heroku ps:scale web=0 --app $(appname)
 
+# scale heroku to free tier dyno
+heroku-web-1:
+	@heroku ps:scale web=1 --app $(appname)
+
 # make heroku-set-container appname=gentle-earth-75811
 heroku-set-container:
 	@heroku stack:set container -a $(appname)
