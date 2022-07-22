@@ -13,6 +13,9 @@ show-ids:
 # Build docker containers
 build: build-web build-db
 
+clean-build:
+    @docker-compose -f docker-compose.yml build --no-cache
+
 build-web:
 	@docker-compose -f docker-compose.yml build django-web
 
