@@ -2,9 +2,9 @@
 # - means ignore the exit status of the command that is executed (normally, a non-zero exit status would stop that part of the build).
 # + means 'execute this command under make -n' (or 'make -t' or 'make -q') when commands are not normally executed.
 
-# Containers ids
-db-id=$(shell docker ps -a -q -f "name=pg14-django4-db"  | head -n 1)
-web-id=$(shell docker ps -a -q -f "name=django4-web" | head -n 1)
+# Containers ids, name is the container name in the docker-compose file
+db-id=$(shell docker ps -a -q -f "name=pg14-db-container-changeme"  | head -n 1)
+web-id=$(shell docker ps -a -q -f "name=django-web-container-changeme" | head -n 1)
 
 show-ids:
 	@echo "web container id: " $(web-id)
@@ -17,10 +17,10 @@ clean-build:
 	@docker-compose -f docker-compose.yml build --no-cache
 
 build-web:
-	@docker-compose -f docker-compose.yml build django-web
+	@docker-compose -f docker-compose.yml build django-web-service
 
 build-db:
-	@docker-compose -f docker-compose.yml build django-db
+	@docker-compose -f docker-compose.yml build django-db-service
 
 # Run docker containers
 run:
@@ -30,13 +30,13 @@ run-back:
 	@docker-compose -f docker-compose.yml up -d
 
 runbuild-web:
-	@docker-compose -f docker-compose.yml up --build django-web
+	@docker-compose -f docker-compose.yml up --build django-web-service
 
 run-web:
-	@docker-compose -f docker-compose.yml up django-web
+	@docker-compose -f docker-compose.yml up django-web-service
 
 run-db:
-	@docker-compose -f docker-compose.yml up db
+	@docker-compose -f docker-compose.yml up django-db-service
 
 # restart containers with a stop then run
 restart: stop run
@@ -74,17 +74,17 @@ shell-db:
 	@docker exec -it $(db-id) bash
 
 run-tests:
-	@docker-compose exec django-web python manage.py test
+	@docker exec -it $(web-id) python manage.py test
 
 # make migrations appname=posts
 migrations:
-	@docker-compose exec django-web python manage.py makemigrations $(appname)
+	@docker exec -it $(web-id) python manage.py makemigrations $(appname)
 
 migrate:
-	@docker-compose exec django-web python manage.py migrate
+	@docker exec -it $(web-id) python manage.py migrate
 
 collectstatic:
-	@docker-compose exec django-web python manage.py collectstatic
+	@docker exec -it $(web-id) python manage.py collectstatic
 
 
 logs:
