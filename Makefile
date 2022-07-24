@@ -14,7 +14,7 @@ show-ids:
 build: build-web build-db
 
 clean-build:
-    @docker-compose -f docker-compose.yml build --no-cache
+  @docker-compose -f docker-compose.yml build --no-cache
 
 build-web:
 	@docker-compose -f docker-compose.yml build django-web
@@ -144,7 +144,7 @@ heroku-create-postgres:
 	@heroku addons:create heroku-postgresql:hobby-dev -a $(appname)
 
 heroku-django-secret-key:
-	@heroku config:set DJANGO_SECRET_KEY=$(shell python -c 'import secrets; print(secrets.token_urlsafe(38))')  -a $(heroku-app-name)
+	@heroku config:set SECRET_KEY=$(shell python -c 'import secrets; print(secrets.token_urlsafe(38))')  -a $(heroku-app-name)
 
 
 # make heroku-git-remote appname=gentle-earth-75811
