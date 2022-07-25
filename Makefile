@@ -14,29 +14,29 @@ show-ids:
 build: build-web build-db
 
 clean-build:
-	@docker-compose -f docker-compose.yml build --no-cache
+	@docker compose -f docker-compose.yml build --no-cache
 
 build-web:
-	@docker-compose -f docker-compose.yml build django-web-service
+	@docker compose -f docker-compose.yml build django-web-service
 
 build-db:
-	@docker-compose -f docker-compose.yml build django-db-service
+	@docker compose -f docker-compose.yml build django-db-service
 
 # Run docker containers
 run:
-	@docker-compose -f docker-compose.yml up
+	@docker compose -f docker-compose.yml up
 
 run-back:
-	@docker-compose -f docker-compose.yml up -d
+	@docker compose -f docker-compose.yml up -d
 
 runbuild-web:
-	@docker-compose -f docker-compose.yml up --build django-web-service
+	@docker compose -f docker-compose.yml up --build django-web-service
 
 run-web:
-	@docker-compose -f docker-compose.yml up django-web-service
+	@docker compose -f docker-compose.yml up django-web-service
 
 run-db:
-	@docker-compose -f docker-compose.yml up django-db-service
+	@docker compose -f docker-compose.yml up django-db-service
 
 # restart containers with a stop then run
 restart: stop run
@@ -45,7 +45,7 @@ restart-web: stop-web run-web
 
 # Stop docker containers, but not remove them nor the volumes
 stop:
-	@docker-compose stop
+	@docker compose stop
 
 stop-db:
 	-@docker stop $(db-id)
@@ -55,7 +55,7 @@ stop-web:
 
 # Stop docker containers, remove them AND the named data volumes
 down:
-	@docker-compose down -v
+	@docker compose down -v
 
 
 # Remove docker containers
@@ -88,7 +88,7 @@ collectstatic:
 
 
 logs:
-	@docker-compose logs
+	@docker compose logs
 
 # Django commands
 # make cmd=migrate manage

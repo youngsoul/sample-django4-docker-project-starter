@@ -20,14 +20,14 @@ WORKDIR /code
 RUN mkdir templates
 
 # Install Dependencies
-COPY ./requirements.in .
-RUN pip install pip-tools
-RUN pip-compile
-RUN pip install -r requirements.txt
-
 # copy local project code to container code
 # first '.' is where the Dockerfile is, the second '.' is to the WORKDIR
 COPY . .
+
+RUN pip install pip-tools
+RUN pip-compile --upgrade
+RUN pip-sync
+
 
 RUN echo "run init_project.sh"
 
