@@ -13,6 +13,8 @@ show-ids:
 # Build docker containers
 build: build-web build-db
 
+build-run: build run
+
 clean-build:
 	@docker compose -f docker-compose.yml build --no-cache
 
