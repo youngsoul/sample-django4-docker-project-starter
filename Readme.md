@@ -40,17 +40,15 @@ This will keep you from having to create a local venv just to install Django and
 ## Settings.py
 
 ```python
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'djangodb',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'django-db', # set in docker-compose.yml
-        'PORT': 5432
-    }
-}
+from environs import Env # new
+env = Env() # new env.read_env() # new
 
+SECRET_KEY = env("SECRET_KEY")
+DEBUG = env.bool("DEBUG")
+
+DATABASES = {
+"default": env.dj_db_url("DATABASE_URL", default="postgres://postgres@db/postgres")
+}
 ```
 
 When the script finishes, the docker containers for the Django WebServer and Postgres DB are running.
