@@ -10,6 +10,11 @@ show-ids:
 	@echo "web container id: " $(web-id)
 	@echo "db container id:  " $(db-id)
 
+init: build
+	@docker compose run django-web-service django-admin startproject django_project .
+	@docker compose stop
+
+
 # Build docker containers
 build: build-web build-db
 
@@ -66,6 +71,8 @@ rm-db:
 	-@docker rm $(db-id)
 rm-web:
 	-@docker rm $(web-id)
+
+run-shell: run-back shell-web
 
 
 # Go to container bash shell
