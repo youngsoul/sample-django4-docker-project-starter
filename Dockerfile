@@ -25,9 +25,10 @@ COPY . .
 
 RUN pip install pip-tools
 RUN pip-compile requirements.in --upgrade
-RUN pip-sync
 
 FROM builder as deployment
+
+RUN pip-sync
 
 RUN adduser --disable-password myuser
 USER myuser
