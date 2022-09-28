@@ -14,7 +14,7 @@ from pathlib import Path
 from environs import Env
 env = Env() # new
 
-env.read_env() # new
+env.read_env("../.env.django") # new
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
