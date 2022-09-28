@@ -82,8 +82,9 @@ shell-web:
 shell-db:
 	@docker exec -it $(db-id) bash
 
-run-tests:
-	@docker exec -it $(web-id) python manage.py test
+run-all-tests: build run-back
+	-docker exec -it $(web-id) pytest tests/
+	@docker compose stop
 
 # make migrations appname=posts
 migrations:
