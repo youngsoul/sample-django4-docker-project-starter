@@ -96,6 +96,9 @@ migrations:
 migrate:
 	@docker exec -it $(web-id) python manage.py migrate
 
+dumpdata:
+    @docker exec -it $(web-id) python manage.py dumpdata $(app)
+
 collectstatic:
 	@docker exec -it $(web-id) python manage.py collectstatic
 
