@@ -10,7 +10,7 @@ show-ids:
 	@echo "web container id: " $(web-id)
 	@echo "db container id:  " $(db-id)
 
-init_project: build
+init-project: build
 	@docker compose run django-web-service django-admin startproject django_project .
 	@docker compose stop
 
@@ -83,7 +83,7 @@ shell-db:
 	@docker exec -it $(db-id) bash
 
 shell-django:
-  @docker exec -it $(web-id) python manage.py shell
+	@docker exec -it $(web-id) python manage.py shell
 
 run-all-tests: build run-back
 	-docker exec -it $(web-id) pytest tests/
@@ -97,7 +97,7 @@ migrate:
 	@docker exec -it $(web-id) python manage.py migrate
 
 dumpdata:
-    @docker exec -it $(web-id) python manage.py dumpdata $(app)
+	@docker exec -it $(web-id) python manage.py dumpdata $(app)
 
 collectstatic:
 	@docker exec -it $(web-id) python manage.py collectstatic

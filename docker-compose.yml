@@ -11,8 +11,8 @@ services:
     ports:
       - "8000:8000"
     command: python manage.py runserver 0.0.0.0:8000
-   env_file:
-     - ./.env.django
+    env_file:
+      - ./.env.django
     volumes:
       - .:/code
     depends_on:
