@@ -10,7 +10,7 @@ show-ids:
 	@echo "web container id: " $(web-id)
 	@echo "db container id:  " $(db-id)
 
-init: build
+init_project: build
 	@docker compose run django-web-service django-admin startproject django_project .
 	@docker compose stop
 

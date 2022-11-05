@@ -4,8 +4,6 @@ The goal of this repo is to create an Django4.x/Postgres docker environment with
 
 This repo assumes you have Docker installed and can issue docker and docker-compose commands from a terminal window.
 
-After cloning the repo, run the `init_project.sh` script.  This will build the image, start the container and execute the `django-admin startproject`, in the running container.
-
 To add new Python dependencies, update the requirements.in file, and rebuild the image.
 
 ### pip-tools
@@ -14,21 +12,27 @@ This docker image uses `pip-tools` to manage dependencies.  By placing the depen
 
 ## Setup
 
+* Make a project root directory and change directory to the project directory
+
 * clone this repo and in terminal window run:
 
 ```shell
 git clone https://github.com/youngsoul/sample-django4-docker-project-starter.git <projectdirname>
 ```
 
-* make init
+* Open docker-compose.yml and change the container_name fields to be something relevant to the project
 
-Run the make target `init`.
+* Open Makefile and at the top, update the container names to match
+
+* make init_project
+
+Run the make target `init_project`.
 This will call the `django-admin startproject` command in the django web container
 
-Note that this will NOT run an initial migration because we want to create a customer User model BEFORE we run the initial migration.
+Note that this will NOT run an initial migration because we want to create a custom User model BEFORE we run the initial migration.
 
 ```shell
-make init
+make init_project
 ```
 
 ## PyCharm
@@ -62,7 +66,7 @@ When the script finishes, the docker containers for the Django WebServer and Pos
 
 You can open a browser and go to:
 
-http://localhost:8080
+http://localhost:8000
 
 and you should see the familiar Django start page.
 
