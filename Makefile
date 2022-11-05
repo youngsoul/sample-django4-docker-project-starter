@@ -83,7 +83,7 @@ shell-db:
 	@docker exec -it $(db-id) bash
 
 shell-django:
-    @docker exec -it $(web-id) python manage.py shell
+  @docker exec -it $(web-id) python manage.py shell
 
 run-all-tests: build run-back
 	-docker exec -it $(web-id) pytest tests/

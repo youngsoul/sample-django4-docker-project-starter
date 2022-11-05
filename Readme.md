@@ -12,7 +12,6 @@ This docker image uses `pip-tools` to manage dependencies.  By placing the depen
 
 ## Setup
 
-* Make a project root directory and change directory to the project directory
 
 * clone this repo and in terminal window run:
 
