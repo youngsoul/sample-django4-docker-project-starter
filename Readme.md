@@ -63,7 +63,13 @@ DATABASES = {
 }
 ```
 
-When the script finishes, the docker containers for the Django WebServer and Postgres DB are running.
+
+
+## Start the Containers
+
+```shell
+make run
+```
 
 You can open a browser and go to:
 
@@ -82,12 +88,10 @@ You almost always want to create a customer user model, BEFORE your initial migr
 * Add the custom user model to admin.py
 
 ```shell
-docker-compose exec django4-web python manage.py startapp accounts
-
-or
-
-make cmd="startapp accounts" manage
+make startapp app=accounts
 ```
+
+See `accounts_models_template.py` for what the simple CustomUser model looks like.
 
 ```python
 # accounts/models.py
