@@ -35,6 +35,8 @@ Note that this will NOT run an initial migration because we want to create a cus
 make init_project
 ```
 
+* Update django_project/settings.py to include 'accounts' app
+
 ## PyCharm
 
 You can now create a PyCharm project and set the Python Interpreter to the docker-compose.yml files selecting 'django-web' as the service
