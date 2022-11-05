@@ -59,7 +59,7 @@ ALLOWED_HOSTS = env("DJANGO_ALLOWED_HOSTS").split(" ")
 
 
 DATABASES = {
-"default": env.dj_db_url("DATABASE_URL", default="postgres://postgres@django-db-service/postgres")
+"default": env.dj_db_url("DATABASE_URL", default="postgres://postgres@django-db-service/djangodb")
 }
 ```
 
