@@ -13,5 +13,7 @@ class CustomUserAdmin(UserAdmin):
     list_display = [ "email",
             "username",
             "is_superuser", ]
+    fieldsets = UserAdmin.fieldsets + (("Personal", {"fields": ("notes",)}),)
+    add_fieldsets = UserAdmin.add_fieldsets + (("Personal", {"fields": ("notes",)}),)
 
-  admin.site.register(CustomUser, CustomUserAdmin)
+admin.site.register(CustomUser, CustomUserAdmin)
