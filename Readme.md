@@ -88,7 +88,7 @@ You almost always want to create a customer user model, BEFORE your initial migr
 * Add the custom user model to admin.py
 
 ```shell
-make startapp app=accounts
+make startapp appname=accounts
 ```
 
 See `accounts_models_template.py` for what the simple CustomUser model looks like.
