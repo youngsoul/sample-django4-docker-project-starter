@@ -97,7 +97,7 @@ migrate:
 	@docker exec -it $(web-id) python manage.py migrate
 
 dumpdata:
-	@docker exec -it $(web-id) python manage.py dumpdata $(app)
+	@docker exec -it $(web-id) python manage.py dumpdata $(appname)
 
 collectstatic:
 	@docker exec -it $(web-id) python manage.py collectstatic
@@ -114,7 +114,7 @@ manage:
 
 # make  startapp app="pages"
 startapp:
-	@docker exec -t $(web-id) python manage.py startapp $(app)
+	@docker exec -t $(web-id) python manage.py startapp $(appname)
 
 volumes:
 	@docker volume ls
