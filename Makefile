@@ -3,8 +3,8 @@
 # + means 'execute this command under make -n' (or 'make -t' or 'make -q') when commands are not normally executed.
 
 # Containers ids, name is the container name in the docker-compose file
-db-id=$(shell docker ps -q -f "name=pg14-db-container-changeme"  | head -n 1)
-web-id=$(shell docker ps -q -f "name=django-web-container-changeme" | head -n 1)
+db-id=$(shell docker ps -q -f "name=sample-pg14-db-container"  | head -n 1)
+web-id=$(shell docker ps -q -f "name=sample-django-web-container" | head -n 1)
 
 show-ids:
 	@echo "web container id: " $(web-id)

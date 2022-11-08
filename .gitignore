@@ -267,3 +267,5 @@ dmypy.json
 cython_debug/
 /requirements.txt
 /requirements-dev.txt
+/django_project/
+/manage.py

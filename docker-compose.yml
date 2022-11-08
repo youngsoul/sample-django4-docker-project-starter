@@ -5,7 +5,7 @@ services:
     build:
       context: .
       target: local_dev
-    container_name: 'django-web-container-changeme'
+    container_name: 'sample-django-web-container'
     labels:
       description: "what does this django service do"
     ports:
@@ -22,7 +22,7 @@ services:
 
   django-db-service:
       image: postgres:14.2
-      container_name: 'pg14-db-container-changeme'
+      container_name: 'sample-pg14-db-container'
       labels:
         description: 'what data does this db hold'
       volumes:
