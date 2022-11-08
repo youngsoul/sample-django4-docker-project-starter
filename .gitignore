@@ -269,3 +269,4 @@ cython_debug/
 /requirements-dev.txt
 /django_project/
 /manage.py
+/accounts/
