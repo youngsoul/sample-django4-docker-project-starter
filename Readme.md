@@ -23,7 +23,7 @@ git clone https://github.com/youngsoul/sample-django4-docker-project-starter.git
 
 * Open Makefile and at the top, update the container names to match
 
-* make init_project
+* make init-project
 
 Run the make target `init_project`.
 This will call the `django-admin startproject` command in the django web container
@@ -31,7 +31,7 @@ This will call the `django-admin startproject` command in the django web contain
 Note that this will NOT run an initial migration because we want to create a custom User model BEFORE we run the initial migration.
 
 ```shell
-make init_project
+make init-project
 ```
 
 * Update django_project/settings.py to include 'accounts' app
@@ -59,7 +59,7 @@ ALLOWED_HOSTS = env("DJANGO_ALLOWED_HOSTS").split(" ")
 
 
 DATABASES = {
-"default": env.dj_db_url("DATABASE_URL", default="postgres://postgres@django-db-service/djangodb")
+"default": env.dj_db_url("DATABASE_URL", default=env("DATABASE_URL"))
 }
 ```
 
