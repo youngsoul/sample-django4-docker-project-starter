@@ -25,7 +25,7 @@ git clone https://github.com/youngsoul/sample-django4-docker-project-starter.git
 
 * make init-project
 
-Run the make target `init_project`.
+Run the make target `init-project`.
 This will call the `django-admin startproject` command in the django web container
 
 Note that this will NOT run an initial migration because we want to create a custom User model BEFORE we run the initial migration.
