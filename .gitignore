@@ -265,8 +265,3 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
-/requirements.txt
-/requirements-dev.txt
-/django_project/
-/manage.py
-/accounts/
