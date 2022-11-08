@@ -91,8 +91,9 @@ You almost always want to create a customer user model, BEFORE your initial migr
 make startapp appname=accounts
 ```
 
-See `accounts_models_template.py` for what the simple CustomUser model looks like.
+See `accounts_starter_files` directory for what the simple CustomUser model looks like.
 
+As an example,
 ```python
 # accounts/models.py
 from django.db import models
@@ -126,31 +127,13 @@ AUTH_USER_MODEL = "accounts.CustomUser"
 * Make migrations
 
 ```shell
-docker-compose exec django-web python manage.py makemigrations accounts
-
-or
-
-make migrations
-
-or
-
-make cmd="makemigrations accounts" manage
-
+make migrations appname=accounts
 ```
 
 * Run migrations
 
 ```shell
-docker-compose exec django-web python manage.py migrate
-
-or
-
 make migrate
-
-or
-
-make cmd=migrate manage
-
 ```
 
 * Create Superuser
