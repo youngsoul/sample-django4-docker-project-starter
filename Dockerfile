@@ -1,5 +1,5 @@
 # Pull base image
-FROM python:3.10.4-slim-bullseye as base
+FROM python:3.11.4-slim-bookworm as base
 
 # Set environment variables
 ENV PIP_DISABLE_PIP_VERSION_CHECK 1
