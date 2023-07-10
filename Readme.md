@@ -23,18 +23,21 @@ git clone https://github.com/youngsoul/sample-django4-docker-project-starter.git
 
 * Open Makefile and at the top, update the container names to match
 
-* make init-project
+* Open Makefile and at the top replace, WEB_SERVICE_NAME and DB_SERVICE_NAME with the service name you select
 
-Run the make target `init-project`.
-This will call the `django-admin startproject` command in the django web container
+* Open .env.django and update the database name, and database service name
+
+Run the make target `build`.
 
 Note that this will NOT run an initial migration because we want to create a custom User model BEFORE we run the initial migration.
 
 ```shell
-make init-project
+make build
 ```
 
-* Update django_project/settings.py to include 'accounts' app
+## Database
+
+Open your favorite DB tool and create the database
 
 ## PyCharm
 
@@ -78,18 +81,9 @@ http://localhost:8000
 and you should see the familiar Django start page.
 
 
-## Custom User model
+## Custom User
 
-You almost always want to create a customer user model, BEFORE your initial migration.
-
-* Create a CustomUser model
-* Update django_project/settings.py
-* Customize UserCreationForm and UserChangeForm
-* Add the custom user model to admin.py
-
-```shell
-make startapp appname=accounts
-```
+The custom user should already be in the `accounts` application.  Look there to add fields
 
 See `accounts_starter_files` directory for what the simple CustomUser model looks like.
 

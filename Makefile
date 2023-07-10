@@ -6,17 +6,20 @@
 db-id=$(shell docker ps -q -f "name=sample-pg14-db-container"  | head -n 1)
 web-id=$(shell docker ps -q -f "name=sample-django-web-container" | head -n 1)
 
+WEB_SERVICE_NAME=django-web-service
+DB_SERVICE_NAME=django-db-service
+
 show-ids:
 	@echo "web container id: " $(web-id)
 	@echo "db container id:  " $(db-id)
 
 init-project: build
-	@docker compose run django-web-service django-admin startproject django_project .
+	@docker compose run ${WEB_SERVICE_NAME} django-admin startproject django_project .
 	@docker compose stop
 
 
 # Build docker containers
-build: build-web build-db
+build: build-db build-web
 
 build-run: build run
 
@@ -24,10 +27,10 @@ clean-build:
 	@docker compose -f docker-compose.yml build --no-cache
 
 build-web:
-	@docker compose -f docker-compose.yml build django-web-service
+	@docker compose -f docker-compose.yml build ${WEB_SERVICE_NAME}
 
 build-db:
-	@docker compose -f docker-compose.yml build django-db-service
+	@docker compose -f docker-compose.yml build ${DB_SERVICE_NAME}
 
 # Run docker containers
 run:
@@ -37,13 +40,13 @@ run-back:
 	@docker compose -f docker-compose.yml up -d
 
 runbuild-web:
-	@docker compose -f docker-compose.yml up --build django-web-service
+	@docker compose -f docker-compose.yml up --build ${WEB_SERVICE_NAME}
 
 run-web:
-	@docker compose -f docker-compose.yml up django-web-service
+	@docker compose -f docker-compose.yml up ${WEB_SERVICE_NAME}
 
 run-db:
-	@docker compose -f docker-compose.yml up django-db-service
+	@docker compose -f docker-compose.yml up ${DB_SERVICE_NAME}
 
 # restart containers with a stop then run
 restart: stop run
@@ -67,8 +70,10 @@ down:
 
 # Remove docker containers
 rm-all: rm-web rm-db
+
 rm-db:
 	-@docker rm $(db-id)
+
 rm-web:
 	-@docker rm $(web-id)
 
@@ -133,50 +138,3 @@ deploy-checklist:
 generate-secret-key:
 	@docker exec -t $(web-id) python -c 'import secrets; print(secrets.token_urlsafe(38))'
 
-# Heroku command
-heroku-login:
-	@heroku login
-
-heroku-whoami:
-	@heroku login
-
-heroku-create:
-	@heroku create
-
-# make heroku-stop-app appname=gentle-earth-75811
-heroku-stop-app:
-	@heroku ps:scale web=0 --app $(appname)
-
-# scale heroku to free tier dyno
-heroku-web-1:
-	@heroku ps:scale web=1 --app $(appname)
-
-# make heroku-set-container appname=gentle-earth-75811
-heroku-set-container:
-	@heroku stack:set container -a $(appname)
-
-# make heroku-create-postgres appname=gentle-earth-75811
-heroku-create-postgres:
-	@heroku addons:create heroku-postgresql:hobby-dev -a $(appname)
-
-heroku-django-secret-key:
-	@heroku config:set SECRET_KEY=$(shell python -c 'import secrets; print(secrets.token_urlsafe(38))')  -a $(heroku-app-name)
-
-
-# make heroku-git-remote appname=gentle-earth-75811
-heroku-git-remote:
-	@heroku git:remote -a $(appname)
-
-heroku-push-master:
-	-git remote -v
-	-git push heroku master
-
-# make heroku-open appname=gentle-earth-75811
-heroku-open:
-	@heroku open -a $(appname)
-
-# Django commands
-# make cmd=migrate heroku-manage
-# make cmd=createsuperuser heroku-manage
-heroku-manage:
-	@heroku run python manage.py $(cmd)

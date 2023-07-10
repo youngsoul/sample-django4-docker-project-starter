@@ -21,7 +21,7 @@ services:
 
 
   django-db-service:
-      image: postgres:14.2
+      image: postgres:15.3
       container_name: 'sample-pg14-db-container'
       labels:
         description: 'what data does this db hold'
